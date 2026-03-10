@@ -88,11 +88,6 @@ riscv32-pipelined-cpu/
 ├── docs/        # Architecture and design documentation
 │
 ├── rtl/         # SystemVerilog CPU implementation
-│   ├── fetch/
-│   ├── decode/
-│   ├── execute/
-│   ├── memory/
-│   └── control/
 │
 ├── tb/          # Verification testbench and UVM environment
 │
