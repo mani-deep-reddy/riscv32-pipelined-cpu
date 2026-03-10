@@ -2,16 +2,16 @@
 
 ## RV32I 5-Stage Pipelined Processor
 
-A 32-bit RISC-V CPU implementing the **RV32I base instruction set** using a classic **5-stage pipeline** and **Harvard memory architecture**.
+A 32-bit RISC-V processor implementing a subset of the **RV32I base instruction set** using a classic **5-stage pipeline** and **Harvard memory architecture**.
 
 ---
 
 ## Features
 
 * RV32I instruction set implementation
-* 5-stage pipeline (IF, ID, EX, MEM, WB)
+* 5-stage pipeline architecture (IF, ID, EX, MEM, WB)
 * Hazard detection and data forwarding
-* SystemVerilog RTL design
+* SystemVerilog RTL implementation
 * UVM-based verification environment
 * FPGA implementation and testing
 
@@ -37,6 +37,49 @@ IF/ID → ID/EX → EX/MEM → MEM/WB
 
 ---
 
+## Supported Instruction Set
+
+### R-Type (Register-Register ALU)
+
+```
+ADD  SUB  AND  OR  XOR
+SLL  SRL  SRA
+SLT
+```
+
+### I-Type (Immediate / Load)
+
+```
+ADDI  ANDI  ORI  SLTI
+LW
+```
+
+### S-Type (Store)
+
+```
+SW
+```
+
+### B-Type (Branch)
+
+```
+BEQ  BNE  BLT  BGE
+```
+
+### U-Type
+
+```
+LUI
+```
+
+### J-Type
+
+```
+JAL
+```
+
+---
+
 ## Project Structure
 
 ```
@@ -45,6 +88,11 @@ riscv32-pipelined-cpu/
 ├── docs/        # Architecture and design documentation
 │
 ├── rtl/         # SystemVerilog CPU implementation
+│   ├── fetch/
+│   ├── decode/
+│   ├── execute/
+│   ├── memory/
+│   └── control/
 │
 ├── tb/          # Verification testbench and UVM environment
 │
@@ -52,6 +100,15 @@ riscv32-pipelined-cpu/
 │
 └── scripts/     # Simulation and automation scripts
 ```
+
+---
+
+## Design Goals
+
+* Clean modular microarchitecture
+* Fully pipelined RV32I processor
+* Industry-style verification using UVM
+* FPGA deployment and testing
 
 ---
 
