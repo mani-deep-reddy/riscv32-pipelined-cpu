@@ -1,0 +1,24 @@
+PC register
+    inputs:
+        next_PC
+        clock
+        reset
+        PCWrite (stall control)
+
+PC+4 adder
+
+PC mux selecting:
+    PC+4
+    branch_target
+    jump_target
+
+Instruction memory
+
+IF/ID pipeline register
+    stores:
+        instruction
+        PC
+        PC+4
+    supports:
+        write enable
+        flush
