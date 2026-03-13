@@ -1,0 +1,34 @@
+Memory Access (MEM) Stage
+
+Inputs (from EX/MEM pipeline register)
+    ALU_result
+    rs2_value
+    rd
+    PC+4
+    control signals
+
+Data memory
+    inputs:
+        address = ALU_result
+        write_data = rs2_value
+        MemRead
+        MemWrite
+        clock
+
+    output:
+        memory_read_data
+
+Operations
+    if MemRead = 1
+        read memory[address]
+
+    if MemWrite = 1
+        memory[address] = write_data
+
+MEM/WB pipeline register
+    stores:
+        ALU_result
+        memory_read_data
+        rd
+        PC+4
+        control signals for WB stage

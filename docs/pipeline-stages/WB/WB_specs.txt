@@ -1,0 +1,31 @@
+Write Back (WB) Stage
+
+Inputs (from MEM/WB pipeline register)
+    ALU_result
+    memory_read_data
+    rd
+    PC+4
+    control signals
+
+Writeback multiplexer
+    inputs:
+        ALU_result
+        memory_read_data
+        PC+4
+
+    controlled by:
+        ResultSrc
+
+    output:
+        writeback_data
+
+Register file write
+    inputs:
+        write_data = writeback_data
+        write_register = rd
+        RegWrite
+        clock
+
+Operation
+    if RegWrite = 1
+        register_file[rd] = writeback_data
