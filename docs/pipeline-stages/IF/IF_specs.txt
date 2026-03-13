@@ -1,3 +1,5 @@
+Instruction Fetch (IF) Stage
+
 PC register
     inputs:
         next_PC
@@ -6,13 +8,20 @@ PC register
         PCWrite (stall control)
 
 PC+4 adder
+    computes:
+        PC_plus4 = PC + 4
 
-PC mux selecting:
-    PC+4
-    branch_target
-    jump_target
+PC mux
+    selects next PC value from:
+        PC_plus4
+        branch_target
+        jump_target
 
 Instruction memory
+    input:
+        PC
+    output:
+        instruction
 
 IF/ID pipeline register
     stores:

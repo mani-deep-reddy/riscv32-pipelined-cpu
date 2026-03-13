@@ -1,0 +1,62 @@
+Instruction Decode (ID) Stage
+
+Inputs (from IF/ID pipeline register)
+    instruction
+    PC
+    PC+4
+
+Instruction field extraction
+    opcode  = instruction[6:0]
+    rd      = instruction[11:7]
+    funct3  = instruction[14:12]
+    rs1     = instruction[19:15]
+    rs2     = instruction[24:20]
+    funct7  = instruction[31:25]
+
+Architectural register file
+    32 registers (x0–x31)
+    read port 1:
+        rs1 → rs1_value
+    read port 2:
+        rs2 → rs2_value
+    write port:
+        used by WB stage
+
+Immediate generator
+    input:
+        instruction
+    output:
+        32-bit sign-extended immediate
+    supports formats:
+        I-type
+        S-type
+        B-type
+        U-type
+        J-type
+
+Control unit
+    inputs:
+        opcode
+        funct3
+        funct7
+
+    outputs:
+        RegWrite
+        MemRead
+        MemWrite
+        ALUSrc
+        Branch
+        Jump
+        ALUOp
+        ResultSrc
+
+ID/EX pipeline register
+    stores:
+        rs1_value
+        rs2_value
+        immediate
+        rd
+        funct3
+        PC
+        PC+4
+        control signals
