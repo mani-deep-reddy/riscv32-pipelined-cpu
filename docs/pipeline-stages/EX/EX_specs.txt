@@ -1,0 +1,58 @@
+Execute (EX) Stage
+
+Inputs (from ID/EX pipeline register)
+    rs1_value
+    rs2_value
+    immediate
+    rd
+    funct3
+    PC
+    PC+4
+    control signals
+
+ALU input mux
+    selects:
+        rs2_value
+        immediate
+    controlled by:
+        ALUSrc
+
+Arithmetic Logic Unit (ALU)
+    inputs:
+        rs1_value
+        ALU_input_B
+    control:
+        ALUOp
+        funct3
+    operations supported:
+        ADD
+        SUB
+        AND
+        OR
+        SLT
+
+Branch / address calculator
+    computes:
+        branch_target = PC + immediate
+
+Branch decision logic
+    determines:
+        branch_taken
+    uses:
+        Branch control signal
+        ALU comparison result
+
+Outputs
+
+    ALU_result
+    branch_target
+    branch_taken
+
+EX/MEM pipeline register
+    stores:
+        ALU_result
+        rs2_value
+        rd
+        branch_target
+        branch_taken
+        control signals for MEM and WB stages
