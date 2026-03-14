@@ -45,15 +45,14 @@ The pipeline includes hazard management through forwarding logic and stall mecha
 ### R-Type (Register–Register ALU)
 
 ```
-ADD  SUB  AND  OR  XOR
-SLL  SRL  SRA
+ADD  SUB  AND  OR
 SLT
 ```
 
 ### I-Type (Immediate / Load)
 
 ```
-ADDI  ANDI  ORI  SLTI
+ADDI  ANDI  ORI 
 LW
 ```
 
@@ -66,7 +65,7 @@ SW
 ### B-Type (Branch)
 
 ```
-BEQ  BNE  BLT  BGE
+BEQ  BNE
 ```
 
 ### U-Type
