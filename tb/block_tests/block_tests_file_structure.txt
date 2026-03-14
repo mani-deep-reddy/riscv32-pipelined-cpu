@@ -1,0 +1,39 @@
+ block_tests/
+        │
+        ├── fetch/
+        │   ├── pc_tb.sv
+        │   ├── pc_mux_tb.sv
+        │   └── imem_tb.sv
+        │
+        ├── decode/
+        │   ├── decoder_tb.sv
+        │   ├── register_file_tb.sv
+        │   └── immediate_generator_tb.sv
+        │
+        ├── execute/
+        │   ├── alu_tb.sv
+        │   ├── alu_control_tb.sv
+        │   ├── address_calculator_tb.sv
+        │   ├── branch_unit_tb.sv
+        │   └── forwarding_unit_tb.sv
+        │
+        ├── memory/
+        │   └── data_memory_tb.sv
+        │
+        ├── writeback/
+        │   └── wb_mux_tb.sv
+        │
+        ├── control/
+        │   ├── main_control_tb.sv
+        │   └── hazard_unit_tb.sv
+        │
+        ├── pipeline/
+        │   ├── if_id_reg_tb.sv
+        │   ├── id_ex_reg_tb.sv
+        │   ├── ex_mem_reg_tb.sv
+        │   └── mem_wb_reg_tb.sv
+        │
+        └── utils/
+            ├── mux2_tb.sv
+            ├── mux3_tb.sv
+            └── pipeline_reg_tb.sv
