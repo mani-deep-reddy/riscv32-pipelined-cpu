@@ -122,3 +122,6 @@ Simulation scripts and configurations are located in the `sim/` directory.
 ## License
 
 This project is open-source and intended for **educational and research purposes**.
+
+
+![Pipeline Architecture](docs/pipeline_architecture.png)
