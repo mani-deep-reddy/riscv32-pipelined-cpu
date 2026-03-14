@@ -1,0 +1,172 @@
+Control and Hazard Unit
+
+Inputs (from instruction decode and pipeline registers)
+    opcode
+    funct3
+    funct7
+
+    ID/EX.rs1
+    ID/EX.rs2
+
+    EX/MEM.rd
+    EX/MEM.RegWrite
+
+    MEM/WB.rd
+    MEM/WB.RegWrite
+
+    ID/EX.MemRead
+
+
+Main Control (Instruction Decoder)
+
+Input
+    opcode
+
+Outputs
+    RegWrite
+    MemRead
+    MemWrite
+    ALUSrc
+    Branch
+    Jump
+    ResultSrc
+    ALUOp
+
+Purpose
+    Decode the instruction type and generate high-level control signals
+    that determine datapath behavior across the pipeline.
+
+Control Signal Definitions
+
+    RegWrite
+        enables write-back to the architectural register file
+
+    MemRead
+        enables data memory read operation
+
+    MemWrite
+        enables data memory write operation
+
+    ALUSrc
+        selects the second operand for the ALU
+            0 → rs2_value
+            1 → immediate
+
+    Branch
+        indicates conditional branch instruction
+
+    Jump
+        indicates unconditional jump instruction
+
+    ResultSrc
+        selects the data written back to the register file
+            ALU result
+            memory read data
+            PC+4
+
+    ALUOp
+        indicates the ALU operation class used by the ALU control unit
+
+
+ALU Control
+
+Inputs
+    ALUOp
+    funct3
+    funct7
+
+Output
+    ALU_operation
+
+Purpose
+    Determine the exact ALU operation based on instruction type
+    and function fields.
+
+Supported ALU Operations
+    ADD
+    SUB
+    AND
+    OR
+    SLT
+
+Example Decoding
+
+    R-type instructions
+        funct3 and funct7 determine the ALU operation
+
+    Load / Store instructions
+        ALU performs ADD for address calculation
+
+    Branch instructions
+        ALU performs SUB for comparison
+
+
+Hazard and Forwarding Unit
+
+Inputs
+    ID/EX.rs1
+    ID/EX.rs2
+
+    EX/MEM.rd
+    EX/MEM.RegWrite
+
+    MEM/WB.rd
+    MEM/WB.RegWrite
+
+    ID/EX.MemRead
+
+Outputs
+    ForwardA
+    ForwardB
+    Stall
+    Flush
+
+Purpose
+    Detect and resolve data hazards and control hazards in the pipeline.
+
+
+Forwarding Logic
+
+    ForwardA
+        selects ALU input source for operand A
+
+    ForwardB
+        selects ALU input source for operand B
+
+    Possible sources
+        register file value
+        EX/MEM ALU result
+        MEM/WB write-back data
+
+
+Load-Use Hazard Detection
+
+    if ID/EX.MemRead
+    and (ID/EX.rd == IF/ID.rs1 or IF/ID.rs2)
+
+        Stall pipeline
+
+
+Control Hazard Handling
+
+    if branch taken
+
+        Flush IF/ID pipeline register
+
+
+Outputs to Datapath
+
+    ALU_operation → ALU
+
+    ForwardA
+    ForwardB
+        control ALU input multiplexers
+
+    Stall
+        disables PC and IF/ID pipeline register update
+
+    Flush
+        clears IF/ID pipeline register
+
+    Control signals
+        drive datapath multiplexers and memory operations
