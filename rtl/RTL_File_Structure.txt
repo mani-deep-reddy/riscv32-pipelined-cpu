@@ -1,0 +1,46 @@
+rtl/
+│
+├── cpu_top.sv
+│
+├── pkg/
+│   ├── riscv_pkg.sv
+│   ├── pipeline_pkg.sv
+│   └── cpu_params.sv
+│
+├── fetch/
+│   ├── pc.sv
+│   ├── pc_mux.sv
+│   └── imem.sv
+│
+├── decode/
+│   ├── decoder.sv
+│   ├── register_file.sv
+│   └── immediate_generator.sv
+│
+├── execute/
+│   ├── alu.sv
+│   ├── alu_control.sv
+│   ├── address_calculator.sv
+│   ├── branch_unit.sv
+│   └── forwarding_unit.sv
+│
+├── memory/
+│   └── data_memory.sv
+│
+├── writeback/
+│   └── wb_mux.sv
+│
+├── control/
+│   ├── main_control.sv
+│   └── hazard_unit.sv
+│
+├── pipeline/
+│   ├── if_id_reg.sv
+│   ├── id_ex_reg.sv
+│   ├── ex_mem_reg.sv
+│   └── mem_wb_reg.sv
+│
+└── utils/
+    ├── mux2.sv
+    ├── mux3.sv
+    └── pipeline_reg.sv
