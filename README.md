@@ -3,23 +3,24 @@
 ## RV32I 5-Stage Pipelined Processor
 
 A 32-bit RISC-V processor implementing a subset of the **RV32I base instruction set** using a classic **5-stage pipeline** and **Harvard memory architecture**.
+The design focuses on a clean modular microarchitecture with hazard handling and a structured SystemVerilog RTL implementation suitable for simulation and architectural study.
 
 ---
 
 ## Features
 
-* RV32I instruction set implementation
-* 5-stage pipeline architecture (IF, ID, EX, MEM, WB)
-* Hazard detection and data forwarding
-* SystemVerilog RTL implementation
-* UVM-based verification environment
-* FPGA implementation and testing
+* RV32I instruction subset implementation
+* Classic **5-stage pipeline architecture**
+* **Hazard detection and data forwarding**
+* Modular **SystemVerilog RTL design**
+* Structured **simulation environment**
+* Architecture documentation and pipeline design breakdown
 
 ---
 
 ## Pipeline Architecture
 
-The processor follows the classic RISC pipeline structure:
+The processor follows the classic RISC pipeline structure.
 
 | Stage | Description                          |
 | ----- | ------------------------------------ |
@@ -29,17 +30,19 @@ The processor follows the classic RISC pipeline structure:
 | MEM   | Data Memory Access                   |
 | WB    | Write Back to Register File          |
 
-Pipeline registers separate each stage:
+Pipeline registers isolate each stage:
 
 ```
 IF/ID → ID/EX → EX/MEM → MEM/WB
 ```
 
+The pipeline includes hazard management through forwarding logic and stall mechanisms.
+
 ---
 
 ## Supported Instruction Set
 
-### R-Type (Register-Register ALU)
+### R-Type (Register–Register ALU)
 
 ```
 ADD  SUB  AND  OR  XOR
@@ -85,28 +88,37 @@ JAL
 ```
 riscv32-pipelined-cpu/
 │
-├── docs/        # Architecture and design documentation
+├── docs/        # Architecture diagrams and design specifications
 │
-├── rtl/         # SystemVerilog CPU implementation
+├── rtl/         # SystemVerilog RTL modules
 │
-├── tb/          # Verification testbench and UVM environment
+├── sim/         # Simulation configuration and scripts
 │
-├── fpga/        # FPGA build scripts and constraints
+├── tb/          # Verification testbench environment
 │
-└── scripts/     # Simulation and automation scripts
+└── scripts/     # Utility and automation scripts
 ```
 
 ---
 
 ## Design Goals
 
-* Clean modular microarchitecture
-* Fully pipelined RV32I processor
-* Industry-style verification using UVM
-* FPGA deployment and testing
+* Develop a **clean and modular pipelined CPU microarchitecture**
+* Implement **hazard detection and forwarding mechanisms**
+* Maintain a **clear separation between datapath and control logic**
+* Provide a well-documented design suitable for **learning and architectural experimentation**
+
+---
+
+## Simulation
+
+The processor is designed to be simulated using common RTL simulation tools.
+Waveforms can be analyzed using waveform viewers such as **GTKWave**.
+
+Simulation scripts and configurations are located in the `sim/` directory.
 
 ---
 
 ## License
 
-This project is open-source and intended for educational and research purposes.
+This project is open-source and intended for **educational and research purposes**.
