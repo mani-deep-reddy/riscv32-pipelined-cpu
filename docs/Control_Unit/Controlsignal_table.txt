@@ -1,0 +1,21 @@
+Instruction | RegWrite | MemRead | MemWrite | ALUSrc | Branch | Jump | ResultSrc | ALUOp
+---------------------------------------------------------------------------------------
+ADD         |    1     |    0    |     0    |   0    |   0    |  0   |   ALU      | R_TYPE
+SUB         |    1     |    0    |     0    |   0    |   0    |  0   |   ALU      | R_TYPE
+AND         |    1     |    0    |     0    |   0    |   0    |  0   |   ALU      | R_TYPE
+OR          |    1     |    0    |     0    |   0    |   0    |  0   |   ALU      | R_TYPE
+SLT         |    1     |    0    |     0    |   0    |   0    |  0   |   ALU      | R_TYPE
+
+ADDI        |    1     |    0    |     0    |   1    |   0    |  0   |   ALU      | ADD
+ANDI        |    1     |    0    |     0    |   1    |   0    |  0   |   ALU      | AND
+ORI         |    1     |    0    |     0    |   1    |   0    |  0   |   ALU      | OR
+
+LW          |    1     |    1    |     0    |   1    |   0    |  0   |   MEM      | ADD
+SW          |    0     |    0    |     1    |   1    |   0    |  0   |   X        | ADD
+
+BEQ         |    0     |    0    |     0    |   0    |   1    |  0   |   X        | SUB
+BNE         |    0     |    0    |     0    |   0    |   1    |  0   |   X        | SUB
+
+JAL         |    1     |    0    |     0    |   X    |   0    |  1   |   PC+4     | X
+
+LUI         |    1     |    0    |     0    |   1    |   0    |  0   |   ALU      | LUI
