@@ -4,7 +4,7 @@ package cpu_params;
 
     parameter int XLEN = 32;
     parameter int INSTR_WIDTH = 32;
--
+    
     // Register File
 
     parameter int REG_COUNT  = 32;
