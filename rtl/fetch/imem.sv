@@ -7,10 +7,6 @@ module imem (
 
     // instruction memory
     logic [31:0] mem [0:IMEM_DEPTH-1];
-    
-    // debug safety
-        else if (pc[1:0] != 2'b00)
-            $warning("IMEM: Unaligned PC: %h", pc);
 
     logic [XLEN-1:0] index;
 

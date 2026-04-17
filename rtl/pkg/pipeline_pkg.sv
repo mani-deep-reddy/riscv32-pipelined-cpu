@@ -27,4 +27,12 @@ package pipeline_pkg;
         FWD_MEM_WB
     } forward_sel_t;
 
+    // ALU operation source from main control
+    typedef enum logic [1:0] {
+        ALU_SRC_ADD,
+        ALU_SRC_SUB,
+        ALU_SRC_RTYPE,
+        ALU_SRC_LUI
+    } alu_op_src_t;
+
 endpackage
