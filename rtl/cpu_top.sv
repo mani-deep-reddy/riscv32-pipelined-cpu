@@ -27,7 +27,7 @@ module cpu_top (
     wire [31:0] regfile_rs1_value;
     wire [31:0] regfile_rs2_value;
 
-    wire [2:0] imm_type;
+    logic [2:0] imm_type;
     wire [31:0] immediate;
 
     wire        ctrl_reg_write;
@@ -41,9 +41,12 @@ module cpu_top (
 
     wire [31:0] id_ex_rs1_value;
     wire [31:0] id_ex_rs2_value;
+    wire [4:0]  id_ex_rs1;
+    wire [4:0]  id_ex_rs2;
     wire [31:0] id_ex_immediate;
     wire [4:0]  id_ex_rd;
     wire [2:0]  id_ex_funct3;
+    wire [6:0]  id_ex_funct7;
     wire [31:0] id_ex_pc;
     wire [31:0] id_ex_pc_plus4;
     wire        id_ex_reg_write;
@@ -165,7 +168,7 @@ module cpu_top (
 
     always_comb begin
         case (decoder_opcode)
-            OPCODE_OP_IMM, OPCODE_LOAD, OPCODE_STORE, OPCODE_LUI: imm_type = IMM_I;
+            OPCODE_OP_IMM, OPCODE_LOAD, OPCODE_LUI: imm_type = IMM_I;
             OPCODE_STORE: imm_type = IMM_S;
             OPCODE_BRANCH: imm_type = IMM_B;
             OPCODE_JAL: imm_type = IMM_J;
@@ -196,8 +199,8 @@ module cpu_top (
         .ID_EX_mem_read(id_ex_mem_read),
         .IF_ID_rs1(decoder_rs1),
         .IF_ID_rs2(decoder_rs2),
-        .ID_EX_rs1(id_ex_rs1_value),
-        .ID_EX_rs2(id_ex_rs2_value),
+        .ID_EX_rs1(id_ex_rs1),
+        .ID_EX_rs2(id_ex_rs2),
         .EX_MEM_rd(ex_mem_rd),
         .MEM_WB_rd(mem_wb_rd),
         .EX_MEM_reg_write(ex_mem_reg_write),
@@ -216,9 +219,12 @@ module cpu_top (
         .flush(flush),
         .rs1_value_in(regfile_rs1_value),
         .rs2_value_in(regfile_rs2_value),
+        .rs1_in(decoder_rs1),
+        .rs2_in(decoder_rs2),
         .immediate_in(immediate),
         .rd_in(decoder_rd),
         .funct3_in(decoder_funct3),
+        .funct7_in(decoder_funct7),
         .pc_in(if_id_pc),
         .pc_plus4_in(if_id_pc_plus4),
         .reg_write_in(ctrl_reg_write),
@@ -231,9 +237,12 @@ module cpu_top (
         .alu_op_in(ctrl_alu_op),
         .rs1_value(id_ex_rs1_value),
         .rs2_value(id_ex_rs2_value),
+        .rs1(id_ex_rs1),
+        .rs2(id_ex_rs2),
         .immediate(id_ex_immediate),
         .rd(id_ex_rd),
         .funct3(id_ex_funct3),
+        .funct7(id_ex_funct7),
         .pc(id_ex_pc),
         .pc_plus4(id_ex_pc_plus4),
         .reg_write(id_ex_reg_write),
@@ -272,7 +281,7 @@ module cpu_top (
     alu_control u_alu_control (
         .ALUOp(id_ex_alu_op),
         .funct3(id_ex_funct3),
-        .funct7(7'b0),
+        .funct7(id_ex_funct7),
         .alu_operation(alu_operation)
     );
 

@@ -8,9 +8,12 @@ module id_ex_reg (
 
     input  logic [31:0] rs1_value_in,
     input  logic [31:0] rs2_value_in,
+    input  logic [4:0]  rs1_in,
+    input  logic [4:0]  rs2_in,
     input  logic [31:0] immediate_in,
     input  logic [4:0]  rd_in,
     input  logic [2:0]  funct3_in,
+    input  logic [6:0]  funct7_in,
     input  logic [31:0] pc_in,
     input  logic [31:0] pc_plus4_in,
 
@@ -25,9 +28,12 @@ module id_ex_reg (
 
     output logic [31:0] rs1_value,
     output logic [31:0] rs2_value,
+    output logic [4:0]  rs1,
+    output logic [4:0]  rs2,
     output logic [31:0] immediate,
     output logic [4:0]  rd,
     output logic [2:0]  funct3,
+    output logic [6:0]  funct7,
     output logic [31:0] pc,
     output logic [31:0] pc_plus4,
 
@@ -45,9 +51,12 @@ module id_ex_reg (
         if (reset) begin
             rs1_value   <= '0;
             rs2_value   <= '0;
+            rs1         <= '0;
+            rs2         <= '0;
             immediate   <= '0;
             rd          <= '0;
             funct3      <= '0;
+            funct7      <= '0;
             pc          <= '0;
             pc_plus4    <= '0;
             reg_write   <= '0;
@@ -62,9 +71,12 @@ module id_ex_reg (
         else if (flush) begin
             rs1_value   <= '0;
             rs2_value   <= '0;
+            rs1         <= '0;
+            rs2         <= '0;
             immediate   <= '0;
             rd          <= '0;
             funct3      <= '0;
+            funct7      <= '0;
             pc          <= '0;
             pc_plus4    <= '0;
             reg_write   <= '0;
@@ -79,9 +91,12 @@ module id_ex_reg (
         else if (stall) begin
             rs1_value   <= rs1_value;
             rs2_value   <= rs2_value;
+            rs1         <= rs1;
+            rs2         <= rs2;
             immediate   <= immediate;
             rd          <= rd;
             funct3      <= funct3;
+            funct7      <= funct7;
             pc          <= pc;
             pc_plus4    <= pc_plus4;
             reg_write   <= reg_write;
@@ -96,9 +111,12 @@ module id_ex_reg (
         else begin
             rs1_value   <= rs1_value_in;
             rs2_value   <= rs2_value_in;
+            rs1         <= rs1_in;
+            rs2         <= rs2_in;
             immediate   <= immediate_in;
             rd          <= rd_in;
             funct3      <= funct3_in;
+            funct7      <= funct7_in;
             pc          <= pc_in;
             pc_plus4    <= pc_plus4_in;
             reg_write   <= reg_write_in;
