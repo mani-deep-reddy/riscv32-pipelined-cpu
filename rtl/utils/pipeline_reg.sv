@@ -1,5 +1,5 @@
 module pipeline_reg #(
-    parameter int WIDTH
+    parameter int WIDTH = 32
     )(
         input logic clk,
         input logic reset,

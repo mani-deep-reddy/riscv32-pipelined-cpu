@@ -1,5 +1,7 @@
 module immediate_generator_tb;
 
+    import pipeline_pkg::*;
+
     logic [31:0] instruction;
     imm_type_t   imm_type;
 
