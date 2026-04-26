@@ -5,11 +5,14 @@ import pipeline_pkg::*;
 module cpu_top (
     input  logic clk,
     input  logic reset,
+    input  logic        imem_we,
+    input  logic [31:0] imem_waddr,
+    input  logic [31:0] imem_wdata,
     output logic [31:0] pc_debug
 );
 
     wire [31:0] pc_current;
-    wire [31:0] pc_next;
+    logic [31:0] pc_next;
     wire [31:0] pc_plus4;
     wire [31:0] instruction;
 
@@ -127,7 +130,12 @@ module cpu_top (
     );
 
     imem u_imem (
+        .clk(clk),
+        .reset(reset),
         .pc(pc_current),
+        .write_enable(imem_we),
+        .write_addr(imem_waddr),
+        .write_data(imem_wdata),
         .instruction(instruction)
     );
 

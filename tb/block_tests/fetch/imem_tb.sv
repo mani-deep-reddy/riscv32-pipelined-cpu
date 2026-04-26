@@ -9,7 +9,12 @@ module imem_tb;
     int errors;
 
     imem dut (
+        .clk(1'b0),
+        .reset(1'b0),
         .pc(pc),
+        .write_enable(1'b0),
+        .write_addr(32'h0),
+        .write_data(32'h0),
         .instruction(instruction)
     );
 
@@ -19,10 +24,10 @@ module imem_tb;
 
         errors = 0;
 
-        dut.mem[0] = 32'h00000093;  // ADDI x1, x0, 0
-        dut.mem[1] = 32'h00100113;  // ADDI x2, x0, 1
-        dut.mem[2] = 32'h00200193;  // ADDI x3, x0, 2
-        dut.mem[10] = 32'h023FFF33; // ADD x30, x31, x3
+        dut.mem[0] = 32'h00000093;
+        dut.mem[1] = 32'h00100113;
+        dut.mem[2] = 32'h00200193;
+        dut.mem[10] = 32'h023FFF33;
 
         #1;
 
